@@ -22,6 +22,7 @@ list:              table#checkin tbody of a table
 selectorToToggle:  (table#checkin tbody) tr 
 selectorToSearch   (table#checkin tbody tr) .last_name (will search on this item's .text() )
 
+```html
   <table>
    <tbody>
      <tr>
@@ -30,11 +31,14 @@ selectorToSearch   (table#checkin tbody tr) .last_name (will search on this item
      </tr>
   </tbody>
   </table>
+```html
 
+```javascript
   $('input#search_box').liveUpdate('table#checkin tbody', 'tr', '.last_name')
-     
+```javascript
 
 Credits
 =======
 
-Code from: [http://ejohn.org/blog/jquery-livesearch/](http://ejohn.org/blog/jquery-livesearch/) John Resig and originally written by John Nunemaker at: [http://orderedlist.com/our-writing/blog/articles/live-search-with-quicksilver-style-for-jquery/](http://orderedlist.com/our-writing/blog/articles/live-search-with-quicksilver-style-for-jquery/)
+Code from: [http://ejohn.org/blog/jquery-livesearch/](http://ejohn.org/blog/jquery-livesearch/) 
+John Resig and originally written by John Nunemaker at: [http://orderedlist.com/our-writing/blog/articles/live-search-with-quicksilver-style-for-jquery/](http://orderedlist.com/our-writing/blog/articles/live-search-with-quicksilver-style-for-jquery/)

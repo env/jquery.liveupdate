@@ -15,7 +15,7 @@ Add in the plugin with the following files:
   <script type="text/javascript" src="jquery.liveupdate/quicksilver.js"></script>                            
   <script type="text/javascript" src="jquery.liveupdate/jquery.liveupdate.js"></script>  
 
-Example:           search in one <td> of table row but hide/show its entire containing <tr>
+Example:           search in cell of table row but hide/show the entire containing row
 
 input:             #search_box
 list:              table#checkin tbody of a table
@@ -31,7 +31,7 @@ selectorToSearch   (table#checkin tbody tr) .last_name (will search on this item
      </tr>
   </tbody>
   </table>
-```html
+```
 
 ```javascript
   $('input#search_box').liveUpdate('table#checkin tbody', 'tr', '.last_name')

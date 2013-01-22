@@ -12,8 +12,10 @@ Usage
 
 Add in the plugin with the following files:
 
+```html
   <script type="text/javascript" src="jquery.liveupdate/quicksilver.js"></script>                            
   <script type="text/javascript" src="jquery.liveupdate/jquery.liveupdate.js"></script>  
+```
 
 Example:           search in cell of table row but hide/show the entire containing row
 

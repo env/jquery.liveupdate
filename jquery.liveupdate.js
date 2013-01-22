@@ -1,51 +1,68 @@
 // Original code from: http://ejohn.org/blog/jquery-livesearch/
-// w/ slight modifications to allow full jquery expressions in the list
+// modified to allow searched item to be different than item 
+// whose visibility is toggled
 
-// USAGE:
+// Usage 
 
 // Add in the plugin with the following files:
 
 //  <script type="text/javascript" src="jquery.liveupdate/quicksilver.js"></script>                            
 //  <script type="text/javascript" src="jquery.liveupdate/jquery.liveupdate.js"></script>  
 
-// $('#your-input').liveUpdate('#list-id')
-// If you have html or anchors in your list, remember it only strips out the innerHTML of each jquery elem
-// $('#your-input').liveUpdate('ul#list-id a')
-// You don't have to restrict this to just lists, you can also filter table rows and such
-// $('#your-input').liveUpdate('#tbl tr td')
+// Example:           search in one <td> of table row but hide/show its entire containing <tr>
+// 
+// input:             #search_box
+// list:              table#checkin tbody of a table
+// selectorToToggle:  (table#checkin tbody) tr 
+// selectorToSearch   (table#checkin tbody tr) .last_name (will search on this item's .text() )
+// 
+// <table>
+//  <tbody>
+//    <tr>
+//     <td class='last_name'>Smith</td>
+//     <td class='age'>Age</td>
+//    </tr>
+// </tbody>
+// </table>
 
-jQuery.fn.liveUpdate = function(list){
-  list = jQuery(list);
-  if ( list.length ) {
-      cache = list.map(function(){
-        return this.innerHTML.toLowerCase();
-      });
-      
-    this
-      .keyup(filter).keyup()
-      .parents('form').submit(function(){
-        return false;
-      });
-  }
-    
-  return this;
-    
-  function filter(){
-    var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
-    
-    if ( !term ) {
-      list.show();
-    } else {
-      list.hide();
+// $('input#search_box').liveUpdate('table#checkin tbody', 'tr', '.last_name')
 
-      cache.each(function(i){
-        var score = this.score(term);
-        if (score > 0) { scores.push([score, i]); }
-      });
+jQuery.fn.liveUpdate = function(list, selectorToToggle, selectorToSearchOn){
+	list = jQuery(list);
+	  
+	if ( list.length ) {
+		var rows = list.children(selectorToToggle),
+		
+    		cache = rows.map(function(){
+    			return jQuery(this).find(selectorToSearchOn).text().toLowerCase();
+    		});
+		
+		
+		this
+			.keyup(filter).keyup()
+			.parents('form').submit(function(){
+				return false;
+			});
+	}
+		
+	return this;
+		
+	function filter(){
+		var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
+		
+		if ( !term ) {
+			rows.show();
+		} else {
+			rows.hide();
 
-      jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
-        jQuery(list[ this[1] ]).show();
-      });
-    }
-  }
+			cache.each(function(i){
+				var score = this.score(term);
+				if (score > 0) { scores.push([score, i]); }
+			});
+
+			jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
+				jQuery(rows[ this[1] ]).show();
+			});
+		}
+	}
 };

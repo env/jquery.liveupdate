@@ -1,22 +1,37 @@
 Liveupdate
 ==========
 
-A simple jquery plugin to filter out lists and html elements.
+A simple jQuery plugin implementing quicksilver algorithm to livesearch on HTML elements
 
-Original code from: http://ejohn.org/blog/jquery-livesearch/ w/ slight modifications to allow full jquery expressions in the list.
+Original code from: http://ejohn.org/blog/jquery-livesearch/
+modified to allow searched item to be different than item 
+whose visibility is toggled.
 
-USAGE:
+Usage
+==========
 
 Add in the plugin with the following files:
 
-     <script type="text/javascript" src="jquery.liveupdate/quicksilver.js"></script>                            
-     <script type="text/javascript" src="jquery.liveupdate/jquery.liveupdate.js"></script>  
+  <script type="text/javascript" src="jquery.liveupdate/quicksilver.js"></script>                            
+  <script type="text/javascript" src="jquery.liveupdate/jquery.liveupdate.js"></script>  
 
-     $('#your-input').liveUpdate('#list-id')
-     // If you have html or anchors in your list, remember it only strips out the innerHTML of each jquery elem
-     $('#your-input').liveUpdate('ul#list-id a')
-     // You don't have to restrict this to just lists, you can also filter table rows and such
-     $('#your-input').liveUpdate('#tbl tr td')
+Example:           search in one <td> of table row but hide/show its entire containing <tr>
+
+input:             #search_box
+list:              table#checkin tbody of a table
+selectorToToggle:  (table#checkin tbody) tr 
+selectorToSearch   (table#checkin tbody tr) .last_name (will search on this item's .text() )
+
+  <table>
+   <tbody>
+     <tr>
+      <td class='last_name'>Smith</td>
+      <td class='age'>Age</td>
+     </tr>
+  </tbody>
+  </table>
+
+  $('input#search_box').liveUpdate('table#checkin tbody', 'tr', '.last_name')
      
 
 Credits

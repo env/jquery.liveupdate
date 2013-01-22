@@ -35,7 +35,7 @@ selectorToSearch   (table#checkin tbody tr) .last_name (will search on this item
 
 ```javascript
   $('input#search_box').liveUpdate('table#checkin tbody', 'tr', '.last_name')
-```javascript
+```
 
 Credits
 =======
